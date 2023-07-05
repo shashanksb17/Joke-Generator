@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Joke Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    #keyword {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #generateButton {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #jokeOutput {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .fadeInAnimation {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="container" class="fadeInAnimation">
+    <h1>Joke Generator</h1>
+    <input type="text" id="keyword" placeholder="Enter a keyword">
+    <button id="generateButton" onclick="generateJoke()">Generate Joke</button>
+    <p id="jokeOutput"></p>
+  </div>
+
+  <script>
+    function generateJoke() {
+      const keyword = document.getElementById('keyword').value;
+      const apiUrl = `https://joke-generator-jpki.onrender.com/generate-joke?keyword=${keyword}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const jokeOutput = document.getElementById('jokeOutput');
+          jokeOutput.innerText = data.joke;
+          jokeOutput.classList.add('fadeInAnimation');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>

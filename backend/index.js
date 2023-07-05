@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.status(200).send(`<h1 style="color:blue;text-align:center">Welcome to Joke Generator Backend</h1>`);
   });
 
-app.post('/generate-joke', async (req, res) => {
+app.get('/generate-joke', async (req, res) => {
 
     const user_input = `Write a joke about ${req.query.keyword}.`;
     console.log(user_input);
